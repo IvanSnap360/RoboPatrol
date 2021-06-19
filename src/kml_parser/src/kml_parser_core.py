@@ -18,7 +18,8 @@ def parse(req:execute_parseRequest):
         pms = root.Document.Folder.Placemark
     except:
         pms = root.Document.Placemark
-
+    
+    count = 0
     for p in pms:
         # print("point name:",p.name,"   [",p.Point.coordinates,"]")
         data = str(p.Point.coordinates).split(",")
@@ -26,7 +27,18 @@ def parse(req:execute_parseRequest):
         latitude    = float(data[1])
         altitude    = float(data[2])
         
-        log_out_msg = "\033[36m mark name\033[0m {} \n\t longitude: {} \n\t latitude: {} \n\t altitude: {} \n".format(p.name,longitude,latitude,altitude)
+        log_out_msg = "\033[36m mark_name\033[0m {} \n\t longitude: {} \n\t latitude: {} \n\t altitude: {} \n".format(p.name,longitude,latitude,altitude)
         # rospy.loginfo(log_out_msg)
+        rospy.set_param("/route/points/{}/coordinates(lon,lan,alt)".format(p.name),[longitude,latitude,altitude])
         print(log_out_msg)
+        count += 1
+    rospy.set_param("/route/points/count",count)
+    res = execute_parseResponse()
+    res.message =  "DONE"
+    res.result = True
+    return res
 
+rospy.Service("/bot/system/KML_parser/read",execute_parse,parse)
+
+
+rospy.spin()

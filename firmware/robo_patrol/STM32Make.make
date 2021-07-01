@@ -36,6 +36,7 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
+Core/Src/GNSS.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/system_stm32f4xx.c \
@@ -61,6 +62,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 
 CPP_SOURCES = \
 Core/Src/main.cpp \
+Core/Src/mpu6050.cpp \
 Core/Src/robo_patrol.cpp
 
 

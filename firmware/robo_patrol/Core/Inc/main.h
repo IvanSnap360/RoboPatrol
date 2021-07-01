@@ -37,6 +37,8 @@ extern "C" {
 /* USER CODE END Includes */
 void setup();
 void loop();
+extern I2C_HandleTypeDef hi2c1;
+extern UART_HandleTypeDef huart2;
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
@@ -44,8 +46,6 @@ void loop();
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-uint16_t accel[3];
-uint16_t incline[3];
 
 /* USER CODE END EC */
 

@@ -1,0 +1,11 @@
+<launch>
+    <rosparam file="$(find core)/config/config.yaml" command="load" />
+    <node name="KML_parser" pkg="kml_parser" type="kml_parser_core.py" output="screen"/>
+    
+    <include file="$(find gps_goal)/launch/gps_goal.launch" />
+    <include file="$(find gps_goal)/launch/initialize_origin.launch" >
+        <arg name="origin" value="auto"/>
+    </include>
+
+    
+</launch>

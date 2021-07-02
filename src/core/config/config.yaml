@@ -1,7 +1,0 @@
-/robot_root: /RoboPatrol
-
-
-/gps_dir: /RoboPatrol/sensors/gps
-
-
-/kml_parser_dir: /RoboPatrol/system/kml_parser/parse

@@ -1,0 +1,54 @@
+#include "Kinematics.h"
+
+#define LEFT 0
+#define RIGHT 1
+#define FORWARD 0
+#define BACKWARD 1
+
+#define ROT_DIR_FORWARD 1
+#define ROT_DIR_NONE    0 // stop
+#define ROT_DIR_BACKWARD -1
+
+#define ROS_HARDWARE ArduinoHardware
+#define ROS_MAX_PUBLISHERS 25
+#define ROS_MAX_SUBSCRIBERS 25
+#define ROS_MAX_INPUT_BUFFER_SIZE 2048
+#define ROS_MAX_OUTPUT_BUFFER_SIZE 2048
+
+#define CMD_VELOCITY_SUBSCRIBER_TOPIC_NAME "/cmd_vel"
+#define VELOCITY_PUBLISHER_TOPIC_NAME "/actual_velocity"
+#define VELOCITY_PUBLISH_RATE_Hz 10.0
+
+#define M1_MOTOR_PIN_1 4
+#define M1_MOTOR_PIN_2 5
+#define M1_ENCODER_PIN 16
+
+#define M2_MOTOR_PIN_1 6
+#define M2_MOTOR_PIN_2 7
+#define M2_ENCODER_PIN 17
+
+#define M3_MOTOR_PIN_1 8
+#define M3_MOTOR_PIN_2 9
+#define M3_ENCODER_PIN 18
+
+#define M4_MOTOR_PIN_1 10
+#define M4_MOTOR_PIN_2 11
+#define M4_ENCODER_PIN 19
+
+#define MAX_PWM 255
+#define MIN_PWM -255
+#define MIN_PWM_SIGNAL 100
+
+#define MOTOR_MAX_RPM 70
+#define MOTOR_TIKS_PER_REVOLUTION 1225.0
+#define MOTOR_FUNCTION_SPIN_PERIOD 100
+#define MOTOR_ENCODER_READ_MODE CHANGE
+
+#define ROBOT_BASE_TYPE Kinematics::base::DIFFERENTIAL_DRIVE
+#define ROBOT_BASE_WIDTH 0.175 
+#define ROBOT_BASE_LENTH 0.245
+#define ROBOT_WHEEL_DEAMETR  0.13
+
+
+
+

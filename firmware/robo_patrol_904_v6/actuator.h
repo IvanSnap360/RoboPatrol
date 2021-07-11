@@ -17,7 +17,7 @@ private:
     int _m_pin2;
 
     int _rev_tiks;
-    unsigned long _prev_tiks;
+    long _prev_tiks;
 
     unsigned long spin_last_time;
     unsigned long prev_update_time_;
@@ -49,7 +49,7 @@ public:
     int getDirection();
     void spin(unsigned long period);
 
-    int _encoderTiks;
+    long _encoderTiks;
     int _enc_pin;
 
 };

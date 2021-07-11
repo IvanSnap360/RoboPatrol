@@ -17,10 +17,6 @@ ros::Subscriber<geometry_msgs::Twist> cmd_vel_sub(CMD_VELOCITY_SUBSCRIBER_TOPIC_
 geometry_msgs::Twist actual_vels;
 ros::Publisher vels_pub(VELOCITY_PUBLISHER_TOPIC_NAME, &actual_vels);
 
-double x = 0.0;
-double y = 0.0;
-double th = 0.0;
-
 Kinematics kin(ROBOT_BASE_TYPE,
                MOTOR_MAX_RPM,
                ROBOT_WHEEL_DEAMETR,
@@ -97,8 +93,8 @@ void my_main()
         vels = kin.getVelocities(
             M1.getCurrentRPM(),
             M2.getCurrentRPM(),
-            M3.getCurrentRPM(),
-            M4.getCurrentRPM());
+            M4.getCurrentRPM(),
+            M3.getCurrentRPM());
 
         actual_vels.linear.x = vels.linear_x;
         actual_vels.linear.y = vels.linear_y;

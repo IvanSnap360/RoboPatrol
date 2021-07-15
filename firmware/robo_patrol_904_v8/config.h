@@ -15,7 +15,7 @@
 
 #define CMD_VELOCITY_SUBSCRIBER_TOPIC_NAME "/cmd_vel"
 #define VELOCITY_PUBLISHER_TOPIC_NAME "/actual_velocity"
-#define VELOCITY_PUBLISH_RATE_Hz 10.0
+#define JOINTS_STATE_PUBLISH_RATE_HZ 10.f
 
 
 #define MOTOR_COUNT 4
@@ -48,8 +48,8 @@
 
 #define ROBOT_BASE_WIDTH 0.175 
 #define ROBOT_BASE_LENTH 0.245
-#define ROBOT_WHEEL_DEAMETR  0.13
+#define ROBOT_WHEEL_DEAMETR  0.13f
 
 
 
-
+void my_main(void);

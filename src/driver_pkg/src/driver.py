@@ -1,90 +1,115 @@
 #! /usr/bin/env python3
 import rospy
-from geometry_msgs.msg import Twist, Pose, Quaternion, TransformStamped
-from tf import TransformBroadcaster, transformations
-import tf
-from nav_msgs.msg import Odometry
-from numpy import cos, sin
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import JointState
+import numpy as np
+import time
 
-rospy.init_node("odom_driver")
-
-rospy.loginfo("Start odom_driver")
-
-vels = Twist()
-pos = Pose()
-odom_broadcaster = TransformBroadcaster()
-
-odom = Odometry()
-
-current_time = rospy.Time()
-last_time = rospy.Time()
+rospy.init_node("joint_control_driver")
 
 rate = rospy.Rate(10)
 
-def vels_sub(msg: Twist):
-    global vels
-    vels = msg
+joint_msg = JointState()
+joint_msg.header.stamp = 0.0
+joint_msg.name = ["M1", "M2", "M3", "M4"]
+joint_msg.velocity = [0.0, 0.0, 0.0, 0.0]
+joint_msg.position = [0.0, 0.0, 0.0, 0.0]
+joint_msg.effort = [0.0, 0.0, 0.0, 0.0]
 
-rospy.Subscriber("/actual_velocity", Twist, vels_sub)
-odom_pub = rospy.Publisher("/odom", Odometry, queue_size=50)
+
+__L1__ = 0.175 / 2
+__L2__ = 0.245 / 2
+__D__ = 0.13 
+__r__ = __D__ / 2
+
+linear = 0
+angular = 0
+
+joint_pub = rospy.Publisher("/joint_contol", JointState, queue_size=50)
+
+joint_freedack_msg = JointState()
+joint_freedack_msg.header.stamp = 0.0
+joint_freedack_msg.name = ["M1", "M2", "M3", "M4"]
+joint_freedack_msg.velocity = [0.0, 0.0, 0.0, 0.0]
+joint_freedack_msg.position = [0.0, 0.0, 0.0, 0.0]
+joint_freedack_msg.effort = [0.0, 0.0, 0.0, 0.0]
+def joint_state_sub_cb_f(msg: JointState):
+    global joint_freedack_msg
+    joint_freedack_msg = msg
+
+
+joint_sub = rospy.Subscriber("/joint_state", JointState,joint_state_sub_cb_f)
+vels_pub = rospy.Publisher("/velocities", Twist, queue_size=50)
+
+
+def cmd_vel_f(msg: Twist):
+    global linear
+    global angular
+
+    linear = msg.linear.x
+    angular = msg.angular.z
+
+
+rospy.Subscriber("/cmd_vel", Twist, cmd_vel_f)
+
 
 def main():
-    global last_time
-    global current_time
-    current_time = rospy.Time.now()
+    global linear
+    global angular
 
-    dt = (current_time - last_time).to_sec()
-    dx = (vels.linear.x * cos(pos.orientation.z) -
-          vels.linear.y * sin(pos.orientation.z)) * dt
-    dy = (vels.linear.x * sin(pos.orientation.z) +
-          vels.linear.y * cos(pos.orientation.z)) * dt
-    dth = vels.angular.z * dt
+    joint_msg.header.stamp = rospy.Time.now()
 
-    pos.position.x += dx
-    pos.position.y += dy
-    pos.orientation.z += dth
+    solvetion = [0.0, 0.0, 0.0, 0.0]
 
-    odom_quat = transformations.quaternion_from_euler(0,0,pos.orientation.z)
+    A = np.array([
+        [1., -1., -(__L1__ + __L2__)],
+        [1.,  1.,  (__L1__ + __L2__)],
+        [1.,  1., -(__L1__ + __L2__)],
+        [1., -1.,  (__L1__ + __L2__)]
+    ], dtype=np.float)
 
-    odom_trans = TransformStamped()
-    odom_trans.header.stamp = current_time
-    odom_trans.header.frame_id = "odom"
-    odom_trans.child_frame_id = "base_link"
+    B = np.array([[linear], [0.0], [angular]], dtype=np.float)
 
-    odom_trans.transform.translation.x = pos.position.x
-    odom_trans.transform.translation.y = pos.position.y
-    odom_trans.transform.translation.z = 0.0
-    odom_trans.transform.rotation.x = odom_quat[0]
-    odom_trans.transform.rotation.y = odom_quat[1]
-    odom_trans.transform.rotation.z = odom_quat[2]
-    odom_trans.transform.rotation.w = odom_quat[3]
+    C = A.dot(B)
+    C = C * (1/__r__)
+
+    solvetion[0] = C[0][0]
+    solvetion[1] = C[1][0]
+    solvetion[2] = C[3][0]
+    solvetion[3] = C[2][0]
+
+    # return list of angular velocities in view [LF, LB, RF, RB]
+
+    joint_msg.velocity[0] = solvetion[0]
+    joint_msg.velocity[1] = solvetion[1]
+    joint_msg.velocity[2] = solvetion[2]
+    joint_msg.velocity[3] = solvetion[3]
+
+    joint_pub.publish(joint_msg)
 
 
-    odom_broadcaster.sendTransformMessage(odom_trans)
+def compute_vels():
+    w1 = joint_freedack_msg.velocity[0]
+    w2 = joint_freedack_msg.velocity[1]
+    w3 = joint_freedack_msg.velocity[2]
+    w4 = joint_freedack_msg.velocity[3]
 
-    odom.header.stamp = current_time
-    odom.header.frame_id = "odom"
+    vels_msg = Twist()
 
-    odom.pose.pose.position.x = -pos.position.x
-    odom.pose.pose.position.y = pos.position.y
-    odom.pose.pose.position.z = 0.0
-    odom.pose.pose.orientation.x = odom_quat[0]
-    odom.pose.pose.orientation.y = odom_quat[1]
-    odom.pose.pose.orientation.z = odom_quat[2]
-    odom.pose.pose.orientation.w = odom_quat[3]
+    vl = (((w1)) * __D__) / 2 
+    vr = (((w2)) * __D__) / 2 
 
-    odom.child_frame_id = "base_link"
-    odom.twist.twist.linear.x = vels.linear.x
-    odom.twist.twist.linear.y = vels.linear.y
-    odom.twist.twist.angular.z = vels.angular.z
+    vels_msg.linear.x = (vr + vl) / 2
+    vels_msg.angular.z = (vr - vl) / (__L2__ * 2)
 
-    odom_pub.publish(odom)
+    # vels_msg.linear.x = (w1 + w2 + w3 + w4) * __r__/4
+    # vels_msg.linear.y = (-w1 + w2 + w3 - w4) * r/4
+    # vels_msg.angular.z = (-w1 + w2 - w3 + w4) * (__r__ / 4 * (__L1__ + __L2__))
 
-    last_time = current_time
+    vels_pub.publish(vels_msg)
 
-last_time = rospy.Time.now()
+
 while not rospy.is_shutdown():
     main()
+    compute_vels()
     rate.sleep()
-
-rospy.loginfo("Stop odom_driver")

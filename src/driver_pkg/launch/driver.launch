@@ -4,5 +4,7 @@
         <param name="baud" type="int" value="57600"/>
     </node> 
 
-    <node name="odom_driver" pkg="driver_pkg" type="driver.py" output="screen"/>
+    <node name="cmd_vel_node" pkg="driver_pkg" type="driver.py" output="screen"/>
+    <node name="odometry_pub_node" pkg="driver_pkg" type="odometry" output="screen"/>
+    <include file="$(find viz_pkg)/launch/display.launch" />
 </launch>

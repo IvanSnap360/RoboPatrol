@@ -33,7 +33,7 @@ float base_linear;
 float base_angular;
 
 unsigned long last_blink_time;
-unsigned long vels_publish_last_time;
+unsigned long joint_state_publish_last_time;
 
 void M1_enc_f();
 void M2_enc_f();
@@ -86,7 +86,7 @@ void my_main()
     M3.writeRPM(rpm.motor4);
     M4.writeRPM(rpm.motor3);
 
-    if (millis() - vels_publish_last_time > (1000.0 / VELOCITY_PUBLISH_RATE_Hz))
+    if (millis() - joint_state_publish_last_time > (1000.0 / VELOCITY_PUBLISH_RATE_Hz))
     {
         Kinematics::velocities vels;
 
@@ -101,7 +101,7 @@ void my_main()
         actual_vels.angular.z = vels.angular_z;
 
         vels_pub.publish(&actual_vels);
-        vels_publish_last_time = millis();
+        joint_state_publish_last_time = millis();
     }
 }
 

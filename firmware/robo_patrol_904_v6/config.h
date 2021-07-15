@@ -37,7 +37,7 @@
 
 #define MAX_PWM 255
 #define MIN_PWM -255
-#define MIN_PWM_SIGNAL 100
+#define MIN_PWM_SIGNAL 50
 
 #define MOTOR_MAX_RPM 70
 #define MOTOR_TIKS_PER_REVOLUTION 1225.0
@@ -48,7 +48,3 @@
 #define ROBOT_BASE_WIDTH 0.175 
 #define ROBOT_BASE_LENTH 0.245
 #define ROBOT_WHEEL_DEAMETR  0.13
-
-
-
-

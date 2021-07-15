@@ -49,7 +49,8 @@ public:
     int getDirection();
     void spin(unsigned long period);
 
-    int _encoderTiks;
+    volatile long _encoderTiks;
+    volatile long _encoderTiks2;
     int _enc_pin;
 
 };

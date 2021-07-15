@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 from yaml.error import Mark
 import rospy
 from rospy.exceptions import ROSSerializationException
@@ -14,7 +14,7 @@ rospy.init_node("KML_parser")
 
 marker_publisher = rospy.Publisher("/markers_array",MarkerArray,queue_size=10)
 marray = MarkerArray()
-def parse(req:execute_parseRequest):
+def parse(req):
 
     file = open("{}/KML_src/{}".format(rospack.get_path("kml_parser"),req.file_name),"r") 
     root = parser.parse(file).getroot()

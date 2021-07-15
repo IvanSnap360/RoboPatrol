@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
@@ -33,7 +33,7 @@ joint_freedack_msg.name = ["M1", "M2", "M3", "M4"]
 joint_freedack_msg.velocity = [0.0, 0.0, 0.0, 0.0]
 joint_freedack_msg.position = [0.0, 0.0, 0.0, 0.0]
 joint_freedack_msg.effort = [0.0, 0.0, 0.0, 0.0]
-def joint_state_sub_cb_f(msg: JointState):
+def joint_state_sub_cb_f(msg):
     global joint_freedack_msg
     joint_freedack_msg = msg
 
@@ -42,7 +42,7 @@ joint_sub = rospy.Subscriber("/joint_state", JointState,joint_state_sub_cb_f)
 vels_pub = rospy.Publisher("/velocities", Twist, queue_size=50)
 
 
-def cmd_vel_f(msg: Twist):
+def cmd_vel_f(msg):
     global linear
     global angular
 

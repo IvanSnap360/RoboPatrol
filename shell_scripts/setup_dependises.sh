@@ -1,6 +1,3 @@
-
-
-
 #rosserial
 sudo apt install ros-$ROS_DISTRO-rosserial -y
 sudo apt install ros-$ROS_DISTRO-rosserial-arduino -y

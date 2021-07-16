@@ -6,12 +6,12 @@ sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31
 
 sudo apt update
 
-sudo apt install ros-noetic-ros-base
+sudo apt install ros-melodic-ros-base
 
-apt search ros-noetic
+apt search ros-melodic
 
 echo "####################################################SETUP BASH##################################################"
-echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 
 echo "######################################################Dependencies for building packages########################"

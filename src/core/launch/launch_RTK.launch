@@ -21,4 +21,8 @@
 
     <!-- запуск "читателя" KML файлов -->
     <node name="KML_parser" pkg="kml_parser" type="kml_parser_core.py" output="screen"/>
+
+    <node name="mapping" pkg="gmapping" type="slam_gmapping" output="screen">
+        <param name="scan" type="string" value="/scan"/>
+    </node>
 </launch>

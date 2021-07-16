@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 from yaml.error import Mark
 import rospy
 from rospy.exceptions import ROSSerializationException

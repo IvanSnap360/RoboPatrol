@@ -1,16 +1,14 @@
 <launch>
-    <!-- <rosparam file="$(find core)/config/config.yaml" command="load" /> -->
-    <node name="KML_parser" pkg="kml_parser" type="kml_parser_core.py" output="screen"/>
+    <!-- запуск файла конфигурации -->
+    <rosparam file="$(find core)/config/config.yaml" command="load" />
 
-    <!-- <include file="$(find gps_goal)/launch/gps_goal.launch" />
-    <include file="$(find gps_goal)/launch/initialize_origin.launch" >
-        <arg name="origin" value="auto"/>
-    </include> -->
-
+    <!-- загрузка описания робота -->
     <include file="$(find patrol_description)/launch/description.launch" />
 
+    <!-- запуск драйвера робота для связи с контроллером СНУ -->
     <include file="$(find driver_pkg)/launch/driver.launch" />
 
+    <!-- запуск контроллера лидара  -->
     <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
         <param name="serial_port" type="string" value="/dev/ttyUSB0" />
         <param name="serial_baudrate" type="int" value="256000" /> <!--A3 -->
@@ -20,4 +18,7 @@
         <param name="scan_mode" type="string" value="Sensitivity" />
     </node>
 
+
+    <!-- запуск "читателя" KML файлов -->
+    <node name="KML_parser" pkg="kml_parser" type="kml_parser_core.py" output="screen"/>
 </launch>

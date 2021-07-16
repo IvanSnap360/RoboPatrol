@@ -5,11 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /Status1
-        - /TF1
-        - /TF1/Tree1
-        - /TF1/Tree1/odom1
-        - /TF1/Tree1/odom1/base_link1
       Splitter Ratio: 0.4882352948188782
     Tree Height: 746
   - Class: rviz/Selection
@@ -30,7 +25,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -38,14 +33,6 @@ Toolbars:
 Visualization Manager:
   Class: ""
   Displays:
-    - Alpha: 1
-      Class: rviz/Axes
-      Enabled: true
-      Length: 1
-      Name: Axes
-      Radius: 0.009999999776482582
-      Reference Frame: <Fixed Frame>
-      Value: true
     - Alpha: 0.5
       Cell Size: 1
       Class: rviz/Grid
@@ -63,6 +50,38 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz/Axes
+      Enabled: true
+      Length: 1
+      Name: Axes
+      Radius: 0.009999999776482582
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        base_link:
+          Value: true
+        laser_base:
+          Value: true
+        odom:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        odom:
+          base_link:
+            laser_base:
+              {}
+      Update Interval: 0
       Value: true
     - Alpha: 1
       Class: rviz/RobotModel
@@ -88,8 +107,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
+        Max Value: 0.16500000655651093
+        Min Value: 0.16500000655651093
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -103,39 +122,15 @@ Visualization Manager:
       Min Color: 0; 0; 0
       Name: LaserScan
       Position Transformer: XYZ
-      Queue Size: 10
+      Queue Size: 14
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.009999999776482582
-      Style: Flat Squares
+      Style: Points
       Topic: /scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
-    - Class: rviz/TF
-      Enabled: true
-      Frame Timeout: 15
-      Frames:
-        All Enabled: true
-        base_link:
-          Value: true
-        laser_base:
-          Value: true
-        odom:
-          Value: true
-      Marker Alpha: 1
-      Marker Scale: 1
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: true
-      Tree:
-        odom:
-          base_link:
-            laser_base:
-              {}
-      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
@@ -165,7 +160,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.9886081218719482
+      Distance: 1.7515614032745361
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -173,17 +168,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.04540044069290161
-        Y: 0.14353503286838531
-        Z: -0.06460695713758469
+        X: 0.09280604869127274
+        Y: -0.04229968413710594
+        Z: -0.04568573832511902
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.235398069024086
+      Pitch: 0.6753977537155151
       Target Frame: <Fixed Frame>
-      Yaw: 1.3772329092025757
+      Yaw: 3.11722993850708
     Saved: ~
 Window Geometry:
   Displays:

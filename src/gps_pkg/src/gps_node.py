@@ -12,10 +12,10 @@ from gps_common.msg import GPSFix
 from std_msgs.msg import UInt32
 
 rospy.init_node("gps_node")
-
-gps_dir = rospy.get_param("/gps_dir","/gps")
-gps_port = rospy.get_param("{}/port".format(gps_dir),"/dev/ttyUSB0")
-gps_baud = rospy.get_param("{}/baudrate".format(gps_dir),9600)
+if rospy.has_param("/gps_dir"):
+    gps_dir = rospy.get_param("/gps_dir","/gps")
+    gps_port = rospy.get_param("{}/port".format(gps_dir),"/dev/ttyUSB0")
+    gps_baud = rospy.get_param("{}/baudrate".format(gps_dir),9600)
 
 
 port = serial.Serial(gps_port, gps_baud, timeout=2)

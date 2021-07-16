@@ -1,0 +1,3 @@
+<launch>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find patrol_description)/config/rviz.rviz" />
+</launch>

@@ -207,8 +207,8 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-add_executable(laser_tf src/laser_tf.cpp)
-target_link_libraries(laser_tf ${catkin_LIBRARIES})
+# add_executable(laser_tf src/laser_tf.cpp)
+# target_link_libraries(laser_tf ${catkin_LIBRARIES})
 # add_dependencies(odometry beginner_tutorials_generate_messages_cpp)
 
 include_directories(${catkin_INCLUDE_DIRS})

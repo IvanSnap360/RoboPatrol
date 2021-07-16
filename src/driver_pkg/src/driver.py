@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
@@ -40,6 +40,7 @@ def joint_state_sub_cb_f(msg):
 
 joint_sub = rospy.Subscriber("/joint_state", JointState,joint_state_sub_cb_f)
 vels_pub = rospy.Publisher("/velocities", Twist, queue_size=50)
+
 
 
 def cmd_vel_f(msg):
@@ -96,18 +97,23 @@ def compute_vels():
 
     vels_msg = Twist()
 
-    vl = (((w1)) * __D__) / 2 
-    vr = (((w2)) * __D__) / 2 
+    vfl = (w1 * __D__) / 2 
+    vfr = (w2 * __D__) / 2 
 
-    vels_msg.linear.x = (vr + vl) / 2
-    vels_msg.angular.z = (vr - vl) / (__L2__ * 2)
+    vf_linear = (vfr + vfl) / 2
+    vf_angular = (vfr - vfl) / (__L2__ * 2)
 
-    # vels_msg.linear.x = (w1 + w2 + w3 + w4) * __r__/4
-    # vels_msg.linear.y = (-w1 + w2 + w3 - w4) * r/4
-    # vels_msg.angular.z = (-w1 + w2 - w3 + w4) * (__r__ / 4 * (__L1__ + __L2__))
+    vbl = (w3 * __D__) / 2 
+    vbr = (w4 * __D__) / 2 
+
+    vb_linear = (vbr + vbl) / 2
+    vb_angular = (vbr - vbl) / (__L2__ * 2)
+
+    vels_msg.linear.x = (vf_linear + vb_linear) / 2
+    vels_msg.angular.z = (vf_angular + vb_angular) / 2
 
     vels_pub.publish(vels_msg)
-
+       
 
 while not rospy.is_shutdown():
     main()

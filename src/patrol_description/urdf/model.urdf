@@ -4,7 +4,7 @@
         <visual name="">
             <origin xyz="0.0 0.0 0.0402" rpy="1.57 0.0 3.14"/>
             <geometry>
-                <mesh filename="package://viz_pkg/meshes/body2.STL" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://patrol_description/meshes/body2.STL" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="">
                 <color rgba="1.0 0.0 0.5 1.0"/>
@@ -14,7 +14,7 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://viz_pkg/meshes/body2.STL" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://patrol_description/meshes/body2.STL" scale="0.001 0.001 0.001"/>
             </geometry>
         </collision>
     </link>
@@ -23,7 +23,7 @@
         <visual name="">
             <origin xyz="0.127 0.0875 0.0205" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://viz_pkg/meshes/wheel.STL" scale="1.0"/>
+                <mesh filename="package://patrol_description/meshes/wheel.STL" scale="1.0"/>
             </geometry>
             <material name="">
                 <color rgba="1.0 0.0 0.0 1.0"/>
@@ -33,7 +33,7 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://viz_pkg/meshes/wheel.STL" scale="1.0"/>
+                <mesh filename="package://patrol_description/meshes/wheel.STL" scale="1.0"/>
             </geometry>
         </collision>
     </link> -->

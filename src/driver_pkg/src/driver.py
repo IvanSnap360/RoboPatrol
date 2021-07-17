@@ -72,7 +72,8 @@ def main():
     B = np.array([[linear], [0.0], [angular]], dtype=np.float)
 
     C = A.dot(B)
-    C = C * (1/__r__)
+    C = C * (1/__r__)# 
+
 
     solvetion[0] = C[0][0]
     solvetion[1] = C[1][0]
@@ -92,8 +93,8 @@ def main():
 def compute_vels():
     w1 = joint_freedack_msg.velocity[0]
     w2 = joint_freedack_msg.velocity[1]
-    w3 = joint_freedack_msg.velocity[2]
-    w4 = joint_freedack_msg.velocity[3]
+    w3 = joint_freedack_msg.velocity[3]
+    w4 = joint_freedack_msg.velocity[2]
 
     vels_msg = Twist()
 

@@ -12,11 +12,11 @@ broadcaster = tf.TransformBroadcaster()
 
 def main():
     broadcaster.sendTransform(
-        (0.0, 0.0, 0.165),
-        transformations.quaternion_from_euler(0,0,3.14),
+        (0.0, 0.0, 0.0),
+        (0.0, 0.0, 0.0,1.0),
         rospy.Time.now(),
-        "laser_base",
-        "base_link")
+        "base_link",
+        "point")
 
 
 while not rospy.is_shutdown():

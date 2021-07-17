@@ -1,5 +1,5 @@
 <launch>
     <param name="robot_description" textfile="$(find patrol_description)/urdf/model.urdf" />
-    <node name="laser_tf_pub" pkg="patrol_description" type="tf_laser.py" output="screen"/>
-    <node name="odom_tf_pub" pkg="patrol_description" type="tf_odom.py" output="screen"/>
+    <node name="laser_tf_pub" pkg="patrol_description" type="tf_laser2base_link.py" output="screen"/>
+    <node name="odom_tf_pub" pkg="patrol_description" type="tf_odom2map.py" output="screen"/>
 </launch>

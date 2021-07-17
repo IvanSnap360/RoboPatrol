@@ -98,20 +98,14 @@ def compute_vels():
 
     vels_msg = Twist()
 
-    vfl = (w1 * __D__) / 2 
-    vfr = (w2 * __D__) / 2 
+    vl = (w1 * __D__) / 2
+    vr = (w2 * __D__) / 2
 
-    vf_linear = (vfr + vfl) / 2
-    vf_angular = (vfr - vfl) / (__L2__ * 2)
+    v_linear = (vr + vl) / 2
+    v_angular = (vr - vl) / (__L2__ * 2)
 
-    vbl = (w3 * __D__) / 2 
-    vbr = (w4 * __D__) / 2 
-
-    vb_linear = (vbr + vbl) / 2
-    vb_angular = (vbr - vbl) / (__L2__ * 2)
-
-    vels_msg.linear.x = (vf_linear + vb_linear) / 2
-    vels_msg.angular.z = (vf_angular + vb_angular) / 2
+    vels_msg.linear.x = v_linear
+    vels_msg.angular.z = v_angular
 
     vels_pub.publish(vels_msg)
        

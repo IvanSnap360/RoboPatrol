@@ -4,7 +4,7 @@ import tf
 from tf import transformations
 import math
 
-rospy.init_node("tf_base_link_node")
+rospy.init_node("tf_odom_link_node")
 
 rate = rospy.Rate(30)
 

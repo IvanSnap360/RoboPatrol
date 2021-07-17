@@ -39,33 +39,18 @@ joint_sub = rospy.Subscriber("/joint_state", JointState, joint_state_sub_cb_f)
 
 odom_pub = rospy.Publisher("/odom", Odometry, queue_size=50)
 
-last_sr = 0
-last_sl = 0
-last_th = 0
-dth = 0
-
 def main():
-    global last_sr
-    global last_sl
     global last_time
-    global dth
     global current_time
     L = 0.250
     current_time = rospy.Time.now()
 
-    sr = (joint_freedack_msg.position[1] + joint_freedack_msg.position[3]) / 2
-    sl = (joint_freedack_msg.position[0] + joint_freedack_msg.position[2]) / 2
+    joint_freedack_msg.position[0]
 
-    dsr = sr - last_sr
-    dsl = sl - last_sl
-    
-    last_sr = sr
-    last_sl = sl
-    
     dt = (current_time - last_time).to_sec()
-    dx = ((dsr + dsl) / 2) * cos(dth + (dsr - dsl) / (4 * L))
-    dy = ((dsr + dsl) / 2) * sin(dth + (dsr - dsl) / (4 * L))
-    dth = (dsr - dsl) / (2 * L)
+    dx = 0
+    dy = 0
+    dth = 0
 
     pos.position.x += dx
     pos.position.y += dy

@@ -1,4 +1,4 @@
-#! /usr/bin/env python3 
+#! /usr/bin/env python 
 import rospkg
 from kml_parser.srv import execute_parse,execute_parseRequest,execute_parseResponse
 

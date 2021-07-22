@@ -2,7 +2,7 @@ import sys
 import os
 import glob
 
-src_dir = "/home/ivan/Documents/Projects/RoboPatrol/src"
+src_dir = "/home/robopatrol/RoboPatrol/src"
 dirs = os.listdir(src_dir)
 
 for dir in dirs:

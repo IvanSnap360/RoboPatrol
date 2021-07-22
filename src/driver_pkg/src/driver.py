@@ -1,4 +1,4 @@
-#! /usr/bin/env python3 
+#! /usr/bin/env python 
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
@@ -7,7 +7,7 @@ import time
 
 rospy.init_node("joint_control_driver")
 
-rate = rospy.Rate(10)
+rate = rospy.Rate(25)
 
 joint_msg = JointState()
 joint_msg.header.stamp = 0.0
@@ -18,7 +18,7 @@ joint_msg.effort = [0.0, 0.0, 0.0, 0.0]
 
 
 __L1__ = 0.175 / 2
-__L2__ = 0.245 / 2
+__L2__ = 0.250 / 2
 __D__ = 0.13 
 __r__ = __D__ / 2
 
@@ -47,7 +47,7 @@ def cmd_vel_f(msg):
     global linear
     global angular
 
-    linear = msg.linear.x
+    linear =  msg.linear.x
     angular = msg.angular.z
 
 
@@ -96,16 +96,58 @@ def compute_vels():
     w3 = joint_freedack_msg.velocity[3]
     w4 = joint_freedack_msg.velocity[2]
 
+    rpm1 = joint_freedack_msg.effort[0]
+    rpm2 = joint_freedack_msg.effort[1]
+    rpm3 = joint_freedack_msg.effort[2]
+    rpm4 = joint_freedack_msg.effort[3]
+
     vels_msg = Twist()
 
-    vl = (w1 * __D__) / 2
-    vr = (w2 * __D__) / 2
+    # vl = (w1 * __D__) / 2
+    # vr = (w2 * __D__) / 2
 
-    v_linear = (vr + vl) / 2
-    v_angular = (vr - vl) / (__L2__ * 2)
+    # v_linear = (vr + vl) / 2
+    # v_angular = (vr - vl) / (__L2__ * 2)
+    # wheel_circumference_ = np.pi * __D__
 
-    vels_msg.linear.x = v_linear
-    vels_msg.angular.z = v_angular
+    # v_linear = 0
+    # v_angular = 0
+
+    # average_rps_x = ((float)(rpm1 + rpm2 + rpm3 + rpm4) / 4) / 60
+    # linear_x = average_rps_x * wheel_circumference_
+
+    # average_rps_a = ((float)(-rpm1 + rpm2 - rpm3 + rpm4) / 4) / 60
+    # angular_z =  (average_rps_a * wheel_circumference_) / ((__L1__) + (__L2__))
+
+    # linear_x = (w1 + w2 + w3 + w4) * (__r__ / 4)
+    # angular_z = (-w1 + w2 - w3 + w4) * (__r__ / (4 * (__L1__ +  __L2__)))
+
+    # A = np.array([
+    #     [1,1,1,1],
+    #     [-1,1,1,-1],
+    #     [-1/(__L1__ + __L2__), 1/(__L1__ + __L2__), -1/(__L1__ + __L2__), 1/(__L1__ + __L2__)]
+    # ], dtype=np.float)
+
+    # B = np.array([[w1],[w2],[w3],[w4]],dtype=np.float)
+
+    # C = A.dot(B)
+    # C *= (__r__ / 4)
+    
+    # linear_x = C[1][0]
+    # angular_z = C[2][0]
+
+    wl = (w1 + w3) / 2
+    wr = (w2 + w4) / 2
+
+    vl = (wl * __D__) / 2
+    vr = (wr * __D__) / 2
+
+    linear_x = (vl + vr) / 2
+    angular_z = (vr - vl) / (__L2__ * 2)
+
+
+    vels_msg.linear.x = round(linear_x,3)
+    vels_msg.angular.z = round(angular_z,3)
 
     vels_pub.publish(vels_msg)
        

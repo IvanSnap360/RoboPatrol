@@ -41,13 +41,14 @@ int main(int argc, char **argv)
 
         //compute odometry in a typical way given the velocities of the robot
         double dt = (current_time - last_time).toSec();
-        double delta_x = (vx * cos(th) - vy * sin(th)) * dt;
-        double delta_y = (vx * sin(th) + vy * cos(th)) * dt;
-        double delta_th = vth * dt;
+        double dd = vx * dt;
+        double dth = vth * dt;
+        double delta_x = dd * cos(th + dth / 2);
+        double delta_y = dd * sin(th + dth / 2);
 
         x += delta_x;
         y += delta_y;
-        th += delta_th;
+        th += dth;
 
         //since all odometry is 6DOF we'll need a quaternion created from yaw
         geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);

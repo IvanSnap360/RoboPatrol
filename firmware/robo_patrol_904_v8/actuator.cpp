@@ -48,11 +48,17 @@ int ACTUATOR::getDirection()
     return _dir;
 }
 
+float ACTUATOR::getRPM()
+{
+    return _rpm;
+}
+
 void ACTUATOR::spin(unsigned long period)
 {
     if (millis() - spin_last_time > period)
     {
         spin_last_time = millis();
+        calcRPM();
     }
 
     int pwm = constrain(_pwm_cntrl, _pwm_min, _pwm_max);

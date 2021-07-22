@@ -23,11 +23,14 @@ int main(int argc, char** argv){
   goal.target_pose.header.stamp = ros::Time::now();
 
   goal.target_pose.pose.position.x = 0.5;
+<<<<<<< HEAD
   goal.target_pose.pose.position.y = 0.0;
   goal.target_pose.pose.position.z = 0.0;
   goal.target_pose.pose.orientation.x = 0.0;
   goal.target_pose.pose.orientation.y = 0.0;
   goal.target_pose.pose.orientation.z = 0.0;
+=======
+>>>>>>> 729b44752565a53642cabfedf5a9efa969dcd6f3
   goal.target_pose.pose.orientation.w = 1.0;
 
   ROS_INFO("Sending goal");
@@ -38,7 +41,11 @@ int main(int argc, char** argv){
   if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
     ROS_INFO("Hooray, the base moved 0.5 meter forward");
   else
+<<<<<<< HEAD
     ROS_INFO("The base failed to move forward  0.5 meter for some reason");
+=======
+    ROS_INFO("The base failed to move forward 0.5 meter for some reason");
+>>>>>>> 729b44752565a53642cabfedf5a9efa969dcd6f3
 
   return 0;
 }

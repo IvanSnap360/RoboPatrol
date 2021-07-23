@@ -25,6 +25,6 @@
     <node name="mapping" pkg="gmapping" type="slam_gmapping" output="screen">
         <param name="scan" type="string" value="/scan"/>
     </node>
-    <include file="$(find patrol_nav)/launch/begin_navigation.launch" />
+    <include file="$(find dwa_planner)/launch/local_planner.launch" />
     
 </launch>

@@ -1,4 +1,4 @@
-#! /usr/bin/env python 
+#! /usr/bin/env python3
 import rospy
 from geometry_msgs.msg import Twist
 
@@ -52,6 +52,10 @@ TELEOP CONFIGURATION:\033[04m\033[01m\033[36mNUMPAD\033[0m
 ----------------------------------------------------------
 """
     print(info_msg)
+
+else:
+    print("INVALID CONTROL CONFIGURATION!!!!!!!!!!!!!!!!!")
+    sys.exit()
 
 stop_teleop_key = '\x03'
 

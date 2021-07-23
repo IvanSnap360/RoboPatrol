@@ -113,6 +113,7 @@ void loop()
       state_eff[3] = M4.getRPM();
 
       state_msg.header.stamp = nh.now();
+      
 
       joint_state_pub.publish(&state_msg);
 

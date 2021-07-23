@@ -95,6 +95,9 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 add_executable(odometry src/odometry.cpp)
 target_link_libraries(odometry ${catkin_LIBRARIES})
+
+add_executable(odom src/odom.cpp)
+target_link_libraries(odom ${catkin_LIBRARIES})
 # add_dependencies(odometry beginner_tutorials_generate_messages_cpp)
 
 include_directories(${catkin_INCLUDE_DIRS})

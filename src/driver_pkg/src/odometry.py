@@ -30,12 +30,6 @@ joint_freedack_msg.position = [0.0, 0.0, 0.0, 0.0]
 joint_freedack_msg.effort = [0.0, 0.0, 0.0, 0.0]
 
 
-def joint_state_sub_cb_f(msg):
-    global joint_freedack_msg
-    joint_freedack_msg = msg
-
-
-joint_sub = rospy.Subscriber("/joint_state", JointState, joint_state_sub_cb_f)
 
 odom_pub = rospy.Publisher("/odom", Odometry, queue_size=50)
 
@@ -45,12 +39,16 @@ def main():
     L = 0.250
     current_time = rospy.Time.now()
 
-    joint_freedack_msg.position[0]
+    v = vels.linear.x
+    w = vels.angular.z
 
     dt = (current_time - last_time).to_sec()
-    dx = 0
-    dy = 0
-    dth = 0
+
+    dd = v * dt
+    dth = w * dt
+
+    dx = dd * cos(pos.orientation.z + (dth /2))
+    dy = dd * sin(pos.orientation.z + (dth /2))
 
     pos.position.x += dx
     pos.position.y += dy
@@ -95,8 +93,18 @@ def main():
 
 
 last_time = rospy.Time.now()
-while not rospy.is_shutdown():
-    main()
-    rate.sleep()
 
+def joint_state_sub_cb_f(msg):
+    global joint_freedack_msg
+    joint_freedack_msg = msg
+
+def vels_sub_cb_f(msg):
+    global vels
+    vels = msg
+    main()
+
+joint_sub = rospy.Subscriber("/joint_state", JointState, joint_state_sub_cb_f)
+vels_sub = rospy.Subscriber("/velocities", Twist,vels_sub_cb_f)
+
+rospy.spin()
 rospy.loginfo("Stop odom_driver")

@@ -119,8 +119,8 @@ def compute_vels():
     # average_rps_a = ((float)(-rpm1 + rpm2 - rpm3 + rpm4) / 4) / 60
     # angular_z =  (average_rps_a * wheel_circumference_) / ((__L1__) + (__L2__))
 
-    # linear_x = (w1 + w2 + w3 + w4) * (__r__ / 4)
-    # angular_z = (-w1 + w2 - w3 + w4) * (__r__ / (4 * (__L1__ +  __L2__)))
+    linear_x = (w1 + w2 + w3 + w4) * (__r__ / 4)
+    angular_z = (-w1 + w2 - w3 + w4) * (__r__ / (4 * (__L1__ +  __L2__)))
 
     # A = np.array([
     #     [1,1,1,1],
@@ -136,14 +136,14 @@ def compute_vels():
     # linear_x = C[1][0]
     # angular_z = C[2][0]
 
-    wl = (w1 + w3) / 2
-    wr = (w2 + w4) / 2
+    # wl = (w1 + w3) / 2
+    # wr = (w2 + w4) / 2
 
-    vl = (wl * __D__) / 2
-    vr = (wr * __D__) / 2
+    # vl = (wl * __D__) / 2
+    # vr = (wr * __D__) / 2
 
-    linear_x = (vl + vr) / 2
-    angular_z = (vr - vl) / (__L2__ * 2)
+    # linear_x = (vl + vr) / 2
+    # angular_z = (vr - vl) / (__L2__ * 2)
 
 
     vels_msg.linear.x = round(linear_x,3)

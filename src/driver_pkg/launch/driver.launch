@@ -5,5 +5,5 @@
     </node> 
 
     <node name="cmd_vel_node" pkg="driver_pkg" type="driver.py" output="screen"/>
-    <node name="odometry_pub_node" pkg="driver_pkg" type="odometry" output="screen"/>
+    <!-- <node name="odometry_pub_node" pkg="driver_pkg" type="odometry" output="screen"/> -->
 </launch>

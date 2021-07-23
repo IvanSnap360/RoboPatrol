@@ -34,7 +34,7 @@
 
 #define M4_MOTOR_PIN_1 10
 #define M4_MOTOR_PIN_2 11
-#define M4_ENCODER_PIN 19
+#define M4_ENCODER_PIN 12
 
 #define MAX_PWM 255
 #define MIN_PWM -255

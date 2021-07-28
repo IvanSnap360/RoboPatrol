@@ -11,7 +11,7 @@
     <arg name="camera1"              			default="t265"/>		<!-- Note: Replace with camera name -->
     <arg name="camera2"              			default="d400"/>		<!-- Note: Replace with camera name -->
     <arg name="clip_distance"             default="-2"/>
-    <arg name="use_rviz"                  default="true"/>
+    <arg name="use_rviz"                  default="false"/>
     <arg name="use_rtabmapviz"            default="false"/>
     
 

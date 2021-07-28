@@ -4,7 +4,7 @@ import tf
 from tf import transformations
 import math
 
-rospy.init_node("tf_base_link_link_node")
+rospy.init_node("tf_rs_base_link_node")
 
 rate = rospy.Rate(30)
 
@@ -12,11 +12,11 @@ broadcaster = tf.TransformBroadcaster()
 
 def main():
     broadcaster.sendTransform(
-        (0.0, 0.0, 0.0),
+        (0.110, 0.0, 0.110),
         (0.0, 0.0, 0.0,1.0),
         rospy.Time.now(),
-        "base_link",
-        "map")
+        "camera_link",
+        "base_link")
 
 
 while not rospy.is_shutdown():

@@ -1,9 +1,9 @@
 <launch>
+
     <include file="$(find patrol_description)/launch/description.launch" />
     <include file="$(find driver_pkg)/launch/driver.launch" />
 
     <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
-
 
     <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" />
 
@@ -12,7 +12,6 @@
         <remap from="image_rect" to="/camera/depth/image_rect_raw"/>
         <remap from="points" to="/camera/depth/points"/>
     </node>
-
 
     <node name="rplidarNode" pkg="rplidar_ros" type="rplidarNode" output="screen">
         <param name="serial_port" type="string" value="/dev/ttyUSB0" />
@@ -27,11 +26,9 @@
         <param name="scan" type="string" value="/scan" />
     </node>
 
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+    <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
     <include file="$(find patrol_navigation)/launch/begin_navigation.launch" />
 
     <node name="gps_node" pkg="gps_pkg" type="gps_node2.py" output="screen"/>
     <include file="$(find gps_goal)/launch/gps_goal.launch"/>
-
-
 </launch>

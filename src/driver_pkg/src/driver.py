@@ -58,6 +58,16 @@ def main():
     global linear
     global angular
 
+    if (angular < 0 and angular > -3.0):
+        angular = -3.0
+    elif (angular > 0 and angular < 3.0):
+        angular = 3.0
+
+    if (linear < 0 and linear > -0.4):
+        linear = -0.4
+    elif (linear > 0 and linear < 0.4):
+        linear = 0.4
+
     joint_msg.header.stamp = rospy.Time.now()
 
     solvetion = [0.0, 0.0, 0.0, 0.0]

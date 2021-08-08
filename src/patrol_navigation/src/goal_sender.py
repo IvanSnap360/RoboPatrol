@@ -10,8 +10,8 @@ msg = MoveBaseGoal()
 msg.target_pose.header.frame_id = "map"
 msg.target_pose.header.stamp = rospy.Time.now()
 
-msg.target_pose.pose.position.x = 0
-msg.target_pose.pose.position.y = 0
+msg.target_pose.pose.position.x = 0.0
+msg.target_pose.pose.position.y = 0.0
 msg.target_pose.pose.position.z = 0.0
 
 msg.target_pose.pose.orientation.x = 0.0

@@ -1,0 +1,223 @@
+**********************************************************************
+* Exports the board to HyperLynx Signal-Integrity Transfer Format (.HYP)
+* Version 2.00 9/11/97 -- 4.17 15/12/2015
+*
+* EAGLE Version 9.0.0 Copyright (c) 1988-2018 Autodesk, Inc.
+*
+* HyperLynx Board exported from:
+* E:/IVAN/Ivan_desktop/Kvantorium/Projects/RoboPatrol/electronic/MAIN_PCB/untitled.brd
+* At 05.08.2021 20:13
+*
+* Schematic NOT is loaded.
+*
+
+{VERSION=2.10}  Compatible with Hyperlynx version 2.10.
+{UNITS=ENGLISH WEIGHT}
+
+**********************************************************************
+* Board Dimensions
+*
+{BOARD
+(PERIMETER_SEGMENT X1=-0.0391 Y1=4.3491 X2=-0.0391 Y2=1.9441) Wires: From Board
+(PERIMETER_ARC X1=-0.0391 Y1=1.9441 X2=0.0809 Y2=1.8241 XC=0.0809 YC=1.9441 R=0.1200) Arcs: Board Outline Arc is CCW
+(PERIMETER_SEGMENT X1=0.0809 Y1=1.8241 X2=0.9409 Y2=1.8241) Wires: From Board
+(PERIMETER_ARC X1=0.9409 Y1=1.8241 X2=1.0209 Y2=1.9041 XC=0.9409 YC=1.9041 R=0.0800) Arcs: Board Outline Arc is CCW
+(PERIMETER_SEGMENT X1=1.0209 Y1=1.9041 X2=1.0209 Y2=4.3141) Wires: From Board
+(PERIMETER_ARC X1=1.0209 Y1=4.3141 X2=0.8909 Y2=4.4441 XC=0.8909 YC=4.3141 R=0.1300) Arcs: Board Outline Arc is CCW
+(PERIMETER_SEGMENT X1=0.8909 Y1=4.4441 X2=0.0559 Y2=4.4441) Wires: From Board
+(PERIMETER_ARC X1=0.0559 Y1=4.4441 X2=-0.0391 Y2=4.3491 XC=0.0559 YC=4.3491 R=0.0950) Arcs: Board Outline Arc is CCW
+}
+
+**********************************************************************
+* Thickness of Copper and Dielectric Layer Data
+*
+{STACKUP
+}
+* Total Board Thickness 0.0000 inch
+
+**********************************************************************
+* Components
+*
+{DEVICES
+(? REF=U$1 NAME=OPENCM9.04 L=Top)  R000 X=0.4900 Y=3.1300 :  Lib: OpenCM9.04 : OPENCM9.04 : Pins 40
+}
+
+**********************************************************************
+* Pads, Smds, and Via Library
+*
+{PADSTACK=THR001,0.039
+(Top,2,0.059,0.059,0.0) ISAPAD Shape was Long and is now Oblong
+(MDEF,0,0.059,0.059,0) ISAPAD
+(Bottom,2,0.059,0.059,0.0) ISAPAD Shape was Long and is now Oblong
+}
+
+**********************************************************************
+* Nets
+*
+{NET=HYP$U$1.0
+(PIN X=0.0400 Y=3.6300 R=U$1.0 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.1
+(PIN X=0.0400 Y=3.5300 R=U$1.1 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.2
+(PIN X=0.0400 Y=3.4300 R=U$1.2 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.3
+(PIN X=0.0400 Y=3.3300 R=U$1.3 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.3.3V
+(PIN X=0.0400 Y=3.8300 R=U$1.3.3V P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.4
+(PIN X=0.0400 Y=3.2300 R=U$1.4 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.5
+(PIN X=0.0400 Y=3.1300 R=U$1.5 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.5V
+(PIN X=0.0400 Y=3.9300 R=U$1.5V P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.5V2
+(PIN X=0.9400 Y=2.2300 R=U$1.5V2 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.6
+(PIN X=0.0400 Y=3.0300 R=U$1.6 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.7
+(PIN X=0.0400 Y=2.9300 R=U$1.7 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.8
+(PIN X=0.0400 Y=2.8300 R=U$1.8 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.9
+(PIN X=0.0400 Y=2.7300 R=U$1.9 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.10
+(PIN X=0.0400 Y=2.6300 R=U$1.10 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.11
+(PIN X=0.0400 Y=2.5300 R=U$1.11 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.12
+(PIN X=0.0400 Y=2.4300 R=U$1.12 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.13
+(PIN X=0.0400 Y=2.3300 R=U$1.13 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.14
+(PIN X=0.0400 Y=2.2300 R=U$1.14 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.15
+(PIN X=0.0400 Y=2.1300 R=U$1.15 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.16
+(PIN X=0.9400 Y=3.2300 R=U$1.16 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.17
+(PIN X=0.9400 Y=3.1300 R=U$1.17 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.18
+(PIN X=0.9400 Y=3.0300 R=U$1.18 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.19
+(PIN X=0.9400 Y=2.9300 R=U$1.19 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.20
+(PIN X=0.9400 Y=2.8300 R=U$1.20 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.21
+(PIN X=0.9400 Y=2.7300 R=U$1.21 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.22
+(PIN X=0.9400 Y=2.6300 R=U$1.22 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.23
+(PIN X=0.9400 Y=2.5300 R=U$1.23 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.24
+(PIN X=0.9400 Y=2.4300 R=U$1.24 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.25
+(PIN X=0.9400 Y=2.3300 R=U$1.25 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.AREF
+(PIN X=0.9400 Y=2.1300 R=U$1.AREF P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.D
+(PIN X=0.9400 Y=3.5300 R=U$1.D P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.GND
+(PIN X=0.0400 Y=3.7300 R=U$1.GND P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.GND2
+(PIN X=0.9400 Y=3.8300 R=U$1.GND2 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.GND3
+(PIN X=0.9400 Y=3.7300 R=U$1.GND3 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.L
+(PIN X=0.9400 Y=3.3300 R=U$1.L P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.RST
+(PIN X=0.0400 Y=4.0300 R=U$1.RST P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.TTL
+(PIN X=0.9400 Y=3.6300 R=U$1.TTL P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.VCC
+(PIN X=0.9400 Y=4.0300 R=U$1.VCC P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.VCC2
+(PIN X=0.9400 Y=3.9300 R=U$1.VCC2 P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+{NET=HYP$U$1.X
+(PIN X=0.9400 Y=3.4300 R=U$1.X P=THR001) Pad Diameter: 0.0594  Drill: 0.0394
+}
+
+**********************************************************************
+* End of data
+*
+{END}
+
+{KEY=028-015E-4E5D}
+

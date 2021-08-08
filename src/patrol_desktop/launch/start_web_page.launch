@@ -1,0 +1,6 @@
+<launch>
+    <node name="web_app" pkg="patrol_desktop" type="web_app.py" output="screen"/>
+    <!-- <node name="patrol_app_node" pkg="patrol_desktop" type="patrol_app.py" output="screen"/> -->
+    
+    <!-- launch-prefix="sudo" -->
+</launch>

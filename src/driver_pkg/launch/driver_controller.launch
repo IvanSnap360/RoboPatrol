@@ -1,0 +1,10 @@
+<launch>
+    <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py" output="screen">
+        <param name="port" type="string" value="/dev/ttyACM0"/>
+        <param name="baud" type="int" value="57600"/>
+    </node> 
+    <rosparam file="$(find driver_pkg)/params/diff_drive_controller_params.yaml" command="load"/>
+    
+    <node name="cmd_vel_node" pkg="driver_pkg" type="driver.py" output="screen"/>
+    
+</launch>

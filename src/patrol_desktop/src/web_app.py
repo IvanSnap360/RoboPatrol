@@ -1,9 +1,11 @@
 #! /usr/bin/env python3
 import rospy
+import json
+import time
 import threading
+import actionlib
 from jinja2 import Template
 from move_base_msgs.msg import MoveBaseAction,MoveBaseGoal
-import actionlib
 from std_msgs.msg import String
 from sensor_msgs.msg import NavSatFix
 import leafmap.foliumap as leafmap
@@ -13,7 +15,7 @@ app = Flask(__name__)
 threading.Thread(target=lambda: rospy.init_node('patrol_app_node', disable_signals=True)).start()
 
 goal_pub = rospy.Publisher("/gps_goal_fix",NavSatFix,queue_size=10)
-
+goals_list = []
 
 start_coords = [56.149568, 40.376083]
 m = leafmap.Map(
@@ -21,7 +23,7 @@ m = leafmap.Map(
                 center=start_coords, 
                 zoom=15,
                 widescreen=True,
-                latlon_control=False,
+                latlon_control=True,
                 draw_control = False)
 
 draw_control = leafmap.plugins.Draw(position="topleft")
@@ -92,18 +94,42 @@ def map():
 
 @app.route('/export_data', methods = ['POST'])
 def get_data():
+    global goals_list
     jsdata = request.form['export_data']
-    print(jsdata)
+    parsed_json = json.loads(jsdata)
+    # print(parsed_json)
+    # print(parsed_json['geometry']['coordinates'])
+    # for point in parsed_json['geometry']['coordinates']:
+        # goals_list.append(point)
+        # print(type(point))
+
+    goals_list = parsed_json['geometry']['coordinates']
+
+
     return jsdata
 
+@app.route('/start_btn', methods = ['POST'])
 def start_btn_cb():
-    pass
+    print("START")
+    print(goals_list)
+    for point in goals_list:
+        print(point)
+        goal = NavSatFix()
+        goal.latitude = point[1]
+        goal.longitude = point[0]
+        goal_pub.publish(goal)
+        time.sleep(1)
+    return("nothing")
 
+@app.route('/stop_btn', methods = ['POST'])
 def stop_btn_cb():
-    pass
+    print("STOP")
+    return("nothing")
 
+@app.route('/pause_btn', methods = ['POST'])
 def pause_btn_cb():
-    pass
+    print("PAUSE")
+    return("nothing")
 
 app.run(host='0.0.0.0', port=8080, debug=True)  
 

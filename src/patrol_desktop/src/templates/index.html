@@ -14,6 +14,7 @@
 <script src="../static/GeoConvert/dist/GeoConvert.js"></script>
 <script src="../static/downloadKML.js"></script>
 <script src="../static/getParam.js"></script>
+<script src="../static/button_handle.js"></script>
 
 <style>
     body {
@@ -26,9 +27,9 @@
 <body>
     <h1> RoboPatrol</h1>
     <h2 style="width: 150px;">
-        <button class="button button1" style="width: 100%;">START MISSION</button>
-        <button class="button button3" style="width: 100%;">STOP MISSION</button>
-        <button class="button button2" style="width: 100%;">PAUSE MISSION</button>
+        <button class="button button1" style="width: 100%;" onclick="button_handle('start_btn')">START MISSION</button>
+        <button class="button button3" style="width: 100%;" onclick="button_handle('stop_btn')">STOP MISSION</button>
+        <button class="button button2" style="width: 100%;" onclick="button_handle('pause_btn')">PAUSE MISSION</button>
         <button class="button button4" style="width: 100%;" onclick="getParam()">EXPORT MISSION</button>
         <button href='#' id='save' class="button button2" style="width: 100%;" onclick="getKMLfile()">SAVE MISSION</button>
     </h2>

@@ -29,13 +29,8 @@
     <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
     <include file="$(find patrol_navigation)/launch/begin_navigation.launch" />
 
-<<<<<<< HEAD
+
     <!-- <node name="gps_node" pkg="gps_pkg" type="gps_node2.py" output="screen"/> -->
     <!-- <include file="$(find gps_goal)/launch/gps_goal.launch"/> -->
 
-
-=======
-    <node name="gps_node" pkg="gps_pkg" type="gps_node2.py" output="screen"/>
-    <include file="$(find gps_goal)/launch/gps_goal.launch"/>
->>>>>>> bf6a13177a826ad0f3018a442b51d926e70a915d
 </launch>

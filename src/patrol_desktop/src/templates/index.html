@@ -1,0 +1,48 @@
+<html>
+
+<head>
+    <title>
+        PatrolWebControlPage
+    </title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <link rel="stylesheet" href="../static/style_button.css">
+</head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<script src="../static/tokml.js"></script>
+<script src="../static/download.js"></script>
+<script src="../static/GeoConvert/dist/GeoConvert.js"></script>
+<script src="../static/downloadKML.js"></script>
+<script src="../static/getParam.js"></script>
+
+<style>
+    body {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 50%;
+    }
+</style>
+
+<body>
+    <h1> RoboPatrol</h1>
+    <h2 style="width: 150px;">
+        <button class="button button1" style="width: 100%;">START MISSION</button>
+        <button class="button button3" style="width: 100%;">STOP MISSION</button>
+        <button class="button button2" style="width: 100%;">PAUSE MISSION</button>
+        <button class="button button4" style="width: 100%;" onclick="getParam()">EXPORT MISSION</button>
+        <button href='#' id='save' class="button button2" style="width: 100%;" onclick="getKMLfile()">SAVE MISSION</button>
+    </h2>
+    <h3>
+        <p>DATA</p>
+        <p></p>
+    </h3>
+
+    <div id=123 style="position:absolute;right: 0%; top: 0%;">
+        <iframe class="map " , src="/map " width="800 " height="800 "></iframe>
+    </div>
+
+
+    <p> @2021 Developed by Ivan</p>
+</body>
+
+</html>

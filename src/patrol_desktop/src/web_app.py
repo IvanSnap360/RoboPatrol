@@ -2,22 +2,32 @@
 import rospy
 import json
 import time
+import cv2
+import numpy as np
 import threading
+import requests
 import actionlib
+import sys
+import random
+import psutil
+from bs4 import BeautifulSoup
 from jinja2 import Template
 from move_base_msgs.msg import MoveBaseAction,MoveBaseGoal
 from std_msgs.msg import String
 from sensor_msgs.msg import NavSatFix
 import leafmap.foliumap as leafmap
 from flask import Flask, render_template, Response,request,jsonify
+from turbo_flask import Turbo
+
 app = Flask(__name__) 
+turbo = Turbo(app)
 
 threading.Thread(target=lambda: rospy.init_node('patrol_app_node', disable_signals=True)).start()
 
 goal_pub = rospy.Publisher("/gps_goal_fix",NavSatFix,queue_size=10)
 goals_list = []
 
-start_coords = [56.149568, 40.376083]
+start_coords = (56.149568, 40.376083)
 m = leafmap.Map(
                 google_map="SATELLITE",
                 center=start_coords, 
@@ -81,10 +91,48 @@ draw_control._template = _template
 draw_control.export = False
 draw_control.add_to(m)
 
+
+
+coordinates_msg = "latitude: {} longtitude: {}"
+
+output_data = """
+        GPS                             System:
+Sattelites: {}                          Load: {} s%
+Current coordinates:                    Temperature: {} *C
+    latitude: {} longtitude: {}         
+Target coordinates:
+    latitude: {} longtitude: {}
+"""
+
+sat_count = 0
+target_lat = 0
+target_long = 0
+current_lat = 0
+current_long = 0
+d_lat = 0
+d_long = 0
+sys_load = 0
+temper = 0
+bat = 0
+time_left = 0
 @app.route('/')
-def index():    
-    m.to_html('templates/map.html')
+def index(): 
+    global sat_count
+    global target_lat
+    global target_long
+    global current_lat
+    global current_long   
+    
     # print("INDEX_HANDLE")
+    
+    sat_count = 0
+    target_lat = 'Now target latitude'
+    target_long = 'Now target longtitude'
+    current_lat = 'waiting gps...'
+    current_long = 'waiting gps...'
+    goals_list.clear()
+
+    m.to_html('templates/map.html')
     return render_template("index.html")
 
 @app.route("/map")
@@ -96,40 +144,84 @@ def map():
 def get_data():
     global goals_list
     jsdata = request.form['export_data']
-    parsed_json = json.loads(jsdata)
-    # print(parsed_json)
-    # print(parsed_json['geometry']['coordinates'])
-    # for point in parsed_json['geometry']['coordinates']:
-        # goals_list.append(point)
-        # print(type(point))
-
-    goals_list = parsed_json['geometry']['coordinates']
-
-
+    print(jsdata)
+    if jsdata:
+        parsed_json = json.loads(jsdata)
+        goals_list = parsed_json['geometry']['coordinates']
+    else:
+        rospy.logwarn("No route")
     return jsdata
 
 @app.route('/start_btn', methods = ['POST'])
 def start_btn_cb():
-    print("START")
-    print(goals_list)
+    global target_lat
+    global target_long
     for point in goals_list:
         print(point)
         goal = NavSatFix()
         goal.latitude = point[1]
         goal.longitude = point[0]
+        target_long = point[0]
+        target_lat = point[1]
         goal_pub.publish(goal)
         time.sleep(1)
     return("nothing")
 
+
+
 @app.route('/stop_btn', methods = ['POST'])
 def stop_btn_cb():
-    print("STOP")
     return("nothing")
 
 @app.route('/pause_btn', methods = ['POST'])
 def pause_btn_cb():
-    print("PAUSE")
     return("nothing")
+
+last_time = 0 
+@app.context_processor
+def inject_load():
+    global last_time
+    global sat_count
+    global target_lat
+    global target_long
+    global current_lat
+    global current_long
+    global d_lat
+    global d_long
+    global temper
+    global sys_load
+    global bat
+    global time_left
+    if time.time() - last_time > 1:
+        sys_load = psutil.cpu_percent()
+        # temper = psutil.sensors_temperatures()['coretemp']
+        # bat = psutil.sensors_battery()[0]
+        # bat = round(bat,2)
+        # time_left = psutil.sensors_battery()[1] / 60
+        # time_left = round(time_left,1)
+        last_time = time.time()
+    return {'sat_count': sat_count,
+            'targ_lat':target_lat,
+            'targ_long':target_long,
+            'curr_lat' : current_lat,
+            'curr_long':current_long,
+            'd_lat':d_lat,
+            'd_long':d_long,
+            'tempre':temper,
+            'lsys_load':sys_load,
+            'bat':bat,
+            'time_left':time_left
+            }
+
+def update_load():
+    with app.app_context():
+        while True:
+            time.sleep(0.001)
+            turbo.push(turbo.replace(render_template('data.html'), 'load'))
+
+@app.before_first_request
+def before_first_request():
+    threading.Thread(target=update_load).start()
 
 app.run(host='0.0.0.0', port=8080, debug=True)  
 

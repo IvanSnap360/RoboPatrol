@@ -91,19 +91,6 @@ draw_control._template = _template
 draw_control.export = False
 draw_control.add_to(m)
 
-
-
-coordinates_msg = "latitude: {} longtitude: {}"
-
-output_data = """
-        GPS                             System:
-Sattelites: {}                          Load: {} s%
-Current coordinates:                    Temperature: {} *C
-    latitude: {} longtitude: {}         
-Target coordinates:
-    latitude: {} longtitude: {}
-"""
-
 sat_count = 0
 target_lat = 0
 target_long = 0
@@ -164,6 +151,7 @@ def start_btn_cb():
         target_long = point[0]
         target_lat = point[1]
         goal_pub.publish(goal)
+        
         time.sleep(1)
     return("nothing")
 

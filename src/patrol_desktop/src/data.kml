@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+    <Document>
+        <Style id="custom1" />
+        <Placemark>
+            <LineString>
+                <tessellate>1</tessellate>
+                <coordinates>40.376301,56.153821 40.370336,56.14892 40.379734,56.147271 40.382051,56.151956</coordinates>
+            </LineString>
+            <styleUrl>custom1</styleUrl>
+        </Placemark>
+    </Document>
+</kml>

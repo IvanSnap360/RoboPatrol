@@ -5,6 +5,7 @@
         PatrolWebControlPage
     </title>
     <link rel="stylesheet" href="../static/style_button.css">
+
 </head>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="../static/tokml.js"></script>
@@ -23,6 +24,14 @@
 </style>
 
 <body>
+    <script>
+        localStorage.clear()
+    </script>
+
+
+
+
+
     <h1> RoboPatrol</h1>
     <h2 style="width: 150px;">
         <button class="button button1" style="width: 100%;" onclick="button_handle('start_btn')">START MISSION</button>
@@ -30,19 +39,15 @@
         <button class="button button2" style="width: 100%;" onclick="button_handle('pause_btn')">PAUSE MISSION</button>
         <button class="button button4" style="width: 100%;" onclick="getParam()">EXPORT MISSION</button>
         <button class="button button2" style="width: 100%;" onclick="getKMLfile()">SAVE MISSION</button>
+        <a href="video_stream"><button class="button button5" style="width: 100%;">CAMERA STREAM</button></a>
     </h2>
     <h3>
         <p>DATA</p>
         {% include "data.html" %} {% block content %}{% endblock %} {{ turbo() }}
-
     </h3>
-    <div style="position:fixed;right: 0%; top: 0%; width:40%;height: 50%; resize: both;">
-        <iframe if="iFrame1" class="map " , src="/map " width="100%" height="100%"></iframe>
+    <div style="position:fixed;right: 0%; top: 0%; width:40%;height: 70%;">
+        <iframe allow="geolocation" id=" iFrame1 " class="map " , src="/map " width="100% " height="100% "></iframe>
     </div>
-
-
-
-
     <p> @2021 Developed by Ivan</p>
 </body>
 

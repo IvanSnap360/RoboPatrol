@@ -6,4 +6,6 @@ function getParam() {
     $.post("/export_data", {
         export_data: drawnItems
     });
+
+    localStorage.clear()
 }

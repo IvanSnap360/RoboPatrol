@@ -26,16 +26,16 @@
             left: 0;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css" />
+    <script src="../static/leaflet.js"></script>
+    <script src="../static/jquery-1.12.4.min.js"></script>
+    <script src="../static/bootstrap.min.js"></script>
+    <script src="../static/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="../static/leaflet.css" />
+    <link rel="stylesheet" href="../static/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="../static/font-awesome.min.css" />
+    <link rel="stylesheet" href="../static/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="../static/leaflet.awesome.rotate.min.css" />
 
     <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -49,23 +49,27 @@
         }
     </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css" />
-    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css" />
+    <script src="../static/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="../static/Control.FullScreen.min.css" />
+    <script src="../static/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="../static/leaflet-measure.min.css" />
+    <script src="../static/leaflet.draw.js"></script>
+    <link rel="stylesheet" href="../static/leaflet.draw.css" />
+    <script src="../static/leaflet-realtime.js"></script>
+    <script src="../static/leaflet-gps/src/leaflet-gps.js"></script>
+    <link rel="stylesheet" href="../static/leaflet-gps/src/leaflet-gps.css" />
+    <script src="../static/leaflet-liveupdate.js"></script>
+    <link rel="stylesheet" href="../static/leaflet-liveupdate.css">
 </head>
 
 <body>
-
     <div class="folium-map" id="map_21f79ff9743d46379a4565c8a15583ed"></div>
-
 </body>
+
 <script>
     var map_21f79ff9743d46379a4565c8a15583ed = L.map(
         "map_21f79ff9743d46379a4565c8a15583ed", {
-            center: [56.149568, 40.376083],
+            center: [0, 0],
             crs: L.CRS.EPSG3857,
             zoom: 15,
             zoomControl: true,
@@ -80,9 +84,30 @@
     );
     L.control.scale().addTo(map_21f79ff9743d46379a4565c8a15583ed);
 
+    var robo_marker = L.marker([0, 0]).addTo(map_21f79ff9743d46379a4565c8a15583ed)
 
+    function handle(name) {
+        $.post(name, function(params) {
+            params = JSON.stringify(params)
+            data = JSON.parse(params)
 
-
+            // console.log(params)
+            // console.log(typeof(params))
+            // console.log(data.lat, data.lon)
+            pos = L.latLng(data.lat, data.lon)
+            robo_marker.setLatLng(pos)
+        });
+    }
+    L.control.liveupdate({
+            update_map: function() {
+                // var pos = L.latLng()
+                handle("/location_cb")
+            },
+            position: 'topleft',
+            interval: 200
+        })
+        .addTo(map_21f79ff9743d46379a4565c8a15583ed)
+        .startUpdating();
 
     var tile_layer_3104e394f966476c9cb764bdb9214179 = L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -162,12 +187,9 @@
         var coords = JSON.stringify(layer.toGeoJSON());
         localStorage.setItem("drawn", coords);
         layer.on('click', function() {
-            //alert(coords);
-            console.log(coords);
             drawnItems.addLayer(layer);
             var data = drawnItems.toGeoJSON();
             console.log(coords);
-            drawnItems = 0;
         });
 
     });

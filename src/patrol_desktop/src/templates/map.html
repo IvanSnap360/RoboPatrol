@@ -60,6 +60,8 @@
     <link rel="stylesheet" href="../static/leaflet-gps/src/leaflet-gps.css" />
     <script src="../static/leaflet-liveupdate.js"></script>
     <link rel="stylesheet" href="../static/leaflet-liveupdate.css">
+    <script src="../static/leaflet-icon-pulse/dist/L.Icon.Pulse.js"></script>
+    <link rel="stylesheet" href="../static/leaflet-icon-pulse/dist/L.Icon.Pulse.css" />
 </head>
 
 <body>
@@ -83,8 +85,16 @@
         }
     );
     L.control.scale().addTo(map_21f79ff9743d46379a4565c8a15583ed);
+    var pulsingIcon = L.icon.pulse({
+        iconSize: [10, 10],
+        color: 'yellow',
+        fillColor: "red",
+        animate: true
+    });
 
-    var robo_marker = L.marker([0, 0]).addTo(map_21f79ff9743d46379a4565c8a15583ed)
+    var robo_marker = L.marker([0, 0], {
+        icon: pulsingIcon
+    }).addTo(map_21f79ff9743d46379a4565c8a15583ed)
 
     function handle(name) {
         $.post(name, function(params) {

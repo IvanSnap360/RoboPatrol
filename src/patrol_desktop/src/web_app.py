@@ -110,9 +110,9 @@ def index():
     target_lat = 'Now target latitude'
     target_long = 'Now target longtitude'
     current_lat = 'waiting gps...'
-    # current_lat = 56.149568
+    current_lat = 56.149568
     current_long = 'waiting gps...'
-    # current_long = 40.376083
+    current_long = 40.376083
     goals_list.clear()
 
     m.to_html('templates/map.html')

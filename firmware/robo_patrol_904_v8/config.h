@@ -1,4 +1,4 @@
-#define LEFT 0
+#define LEFT 0  
 #define RIGHT 1
 #define FORWARD 0
 #define BACKWARD 1
@@ -28,22 +28,22 @@
 #define M2_MOTOR_PIN_2 7
 #define M2_ENCODER_PIN 17
 
-#define M3_MOTOR_PIN_1 8
-#define M3_MOTOR_PIN_2 9
+#define M3_MOTOR_PIN_1 2
+#define M3_MOTOR_PIN_2 3
 #define M3_ENCODER_PIN 18
 
-#define M4_MOTOR_PIN_1 10
-#define M4_MOTOR_PIN_2 11
-#define M4_ENCODER_PIN 12
+#define M4_MOTOR_PIN_1 8
+#define M4_MOTOR_PIN_2 9
+#define M4_ENCODER_PIN 19
 
 #define MAX_PWM 255
 #define MIN_PWM -255
 #define MIN_PWM_SIGNAL 100
 
 
-#define MOTOR_MAX_RPM 70
-#define MOTOR_TIKS_PER_REVOLUTION 1225.0
-#define MOTOR_FUNCTION_SPIN_PERIOD 100
+#define MOTOR_MAX_RPM 120
+#define MOTOR_TIKS_PER_REVOLUTION 40.0
+#define MOTOR_FUNCTION_SPIN_PERIOD 300
 #define MOTOR_ENCODER_READ_MODE CHANGE
 
 #define ROBOT_BASE_WIDTH 0.175 

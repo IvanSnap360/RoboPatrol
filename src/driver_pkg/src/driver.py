@@ -1,4 +1,4 @@
-#! /usr/bin/env python 
+#! /usr/bin/env python3 
 import rospy
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import JointState
@@ -17,9 +17,9 @@ joint_msg.position = [0.0, 0.0, 0.0, 0.0]
 joint_msg.effort = [0.0, 0.0, 0.0, 0.0]
 
 
-__L1__ = 0.175 / 2
-__L2__ = 0.250 / 2
-__D__ = 0.13 
+__L1__ = 0.41 / 2
+__L2__ = 0.42 / 2
+__D__ = 0.15
 __r__ = __D__ / 2
 
 linear = 0
@@ -58,15 +58,15 @@ def main():
     global linear
     global angular
 
-    if (angular < 0 and angular > -3.0):
-        angular = -3.0
-    elif (angular > 0 and angular < 3.0):
-        angular = 3.0
+    # if (angular < 0 and angular > -3.0):
+    #     angular = -3.0
+    # elif (angular > 0 and angular < 3.0):
+    #     angular = 3.0
 
-    if (linear < 0 and linear > -0.4):
-        linear = -0.4
-    elif (linear > 0 and linear < 0.4):
-        linear = 0.4
+    # if (linear < 0 and linear > -0.4):
+    #     linear = -0.4
+    # elif (linear > 0 and linear < 0.4):
+    #     linear = 0.4
 
     joint_msg.header.stamp = rospy.Time.now()
 
@@ -87,8 +87,8 @@ def main():
 
     solvetion[0] = C[0][0]
     solvetion[1] = C[1][0]
-    solvetion[2] = C[3][0]
-    solvetion[3] = C[2][0]
+    solvetion[2] = C[2][0]
+    solvetion[3] = C[3][0]
 
     # return list of angular velocities in view [LF, LB, RF, RB]
 
